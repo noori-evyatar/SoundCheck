@@ -37,7 +37,7 @@
     "react-native-audio": "^4.3.0",
     "react-native-audio-recorder-player": "^2.1.4",
     "react-native-navigation": "2.19.0",
-    "react-native-sound": "^0.10.12",
+    "react-native-sound": "^0.11.0",
     "react-native-vector-icons": "^6.4.2"
   },
   "devDependencies": {

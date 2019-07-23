@@ -5,7 +5,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import FontAwesome5Pro from "react-native-vector-icons/FontAwesome5Pro";
 import AudioRecorderPlayer from "react-native-audio-recorder-player";
-// import Sound from 'react-native-sound';
+import Sound from "react-native-sound";
 
 class Player extends Component {
 	static displayName = "Player"; // Helps when debugging
@@ -22,6 +22,36 @@ class Player extends Component {
 			duration: "00:00:00",
 		};
 	}
+
+	_onPressTurtleButton =  () => {
+		// Import the react-native-sound module
+		var Sound = require('react-native-sound');
+
+		// Enable playback in silence mode
+		Sound.setCategory('Playback');
+
+		// Load the sound file 'whoosh.mp3' from the app bundle
+		// See notes below about preloading sounds within initialization code below.
+		var whoosh = new Sound('sdcard/sound.mp4', Sound.MAIN_BUNDLE, (error) => {
+  			if (error) {
+    		console.log('failed to load the sound', error);
+    		return;
+  		}
+ 		 // loaded successfully
+  		console.log('duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
+
+  			// Play the sound with an onEnd callback
+  			whoosh.play((success) => {
+    		if (success) {
+      		console.log('successfully finished playing');
+			} 
+			else 
+			{
+      		console.log('playback failed due to audio decoding errors');
+    		}
+  		});
+		});
+	};
 
 	_onPressPlayButton = async () => {
 		this.setState({
@@ -70,7 +100,7 @@ class Player extends Component {
 				</View>
 
 				<View style={styles.optionButtonContainerView}>
-					<TouchableOpacity style={[styles.optionPlayerButton, styles.button1]} onPress={this._onPress}>
+					<TouchableOpacity style={[styles.optionPlayerButton, styles.button1]} onPress={this._onPressTurtleButton}>
 						<FontAwesome5Pro name="turtle" color="#000066" size={30} />
 					</TouchableOpacity>
 					<TouchableOpacity style={[styles.optionPlayerButton, styles.button2]} onPress={this._onPress}>
