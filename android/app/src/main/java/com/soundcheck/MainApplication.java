@@ -43,7 +43,8 @@ public class MainApplication extends NavigationApplication {
     
     return Arrays.<ReactPackage>asList(
             new VectorIconsPackage(),
-            new RNAudioRecorderPlayerPackage()
+            new RNAudioRecorderPlayerPackage(),
+            new RNSoundPackage()
     );
   }
 
