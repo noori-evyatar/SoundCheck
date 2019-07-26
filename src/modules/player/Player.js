@@ -25,16 +25,14 @@ class Player extends Component {
 
 
 	_onPressTurtleButton = async () => {
-		var Sound = require('react-native-sound');
 
 		if(this.sound){
             this.sound.play(this.playComplete);
             this.setState({playState:'playing'});
         }else{
-            //const filepath = "sdcard/sound.mp4";
-            console.log('[Play]', filepath);
+            
     
-            this.sound = new Sound( '/sdcard/sound.mp4', '', (error) => {
+            this.sound = new Sound('/sdcard/sound.mp4', '', (error) => {
                 if (error) {
                     console.log('failed to load the sound', error);
                     Alert.alert('Notice', 'audio file error. (Error code : 1)');
@@ -42,9 +40,36 @@ class Player extends Component {
 						playState:'paused',
 					});
                 }else{
-                    this.setState({playState:'playing', duration:this.sound.getDuration()});
-                    this.sound.play(this.playComplete);
+					this.sound.setSpeed(0.5);
+					this.setState({playState:'playing', duration:this.sound.getDuration()});
+                     this.sound.play(this.playComplete);
                 }
+            });    
+        }
+	};
+
+	_onPressRabbitButton = async () => {
+
+		if(this.sound){
+            this.sound.play(this.playComplete);
+            this.setState({playState:'playing'});
+        }else{
+            
+    
+            this.sound = new Sound('/sdcard/sound.mp4', '', (error) => {
+                if (error) {
+                    console.log('failed to load the sound', error);
+                    Alert.alert('Notice', 'audio file error. (Error code : 1)');
+                    this.setState({
+						playState:'paused',
+					});
+                }else{
+					 this.sound.setSpeed(2);
+					this.setState({playState:'playing', duration:this.sound.getDuration()});
+                    this.sound.play(this.playComplete);
+				}
+				
+				
             });    
         }
 	};
@@ -112,7 +137,7 @@ class Player extends Component {
 					<TouchableOpacity style={[styles.optionPlayerButton, styles.button1]} onPress={this._onPressTurtleButton}>
 						<FontAwesome5Pro name="turtle" color="#000066" size={30} />
 					</TouchableOpacity>
-					<TouchableOpacity style={[styles.optionPlayerButton, styles.button2]} onPress={this._onPress}>
+					<TouchableOpacity style={[styles.optionPlayerButton, styles.button2]} onPress={this._onPressRabbitButton}>
 						<FontAwesome5Pro name="rabbit-fast" color="#000066" size={30} />
 					</TouchableOpacity>
 				</View>
